@@ -1,7 +1,7 @@
 const express =require("express")
 const app=express()
-app.get("/home",function(req,res){
-    res.send("welcome to home page")
+app.get("/",function(req,res){
+    res.send("welcome "+req.query.name)
 })
-app.listen(123)
-console.log("app start at port 123")
+app.listen(12)
+console.log("app start at port 12")
