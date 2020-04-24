@@ -1,7 +1,16 @@
 const express =require("express")
 const app=express()
-app.get("/",function(req,res){
-    res.send("welcome "+req.query.name)
+app.use(function(req, res, next){
+console.log(req.ip)
+console.log(req.headers)
+console.log(req.params)
+console.log(req.hostname)
+console.log(req.query)
+console.log(req.protocol)
+next()
 })
-app.listen(12)
+app.get("/books",function(req,res){
+    res.json("books data in object ")
+})
+app.listen(1249)
 console.log("app start at port 12")
