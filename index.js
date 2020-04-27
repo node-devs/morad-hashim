@@ -1,16 +1,10 @@
 const express =require("express")
+const routers = require("./routes")
 const app=express()
-app.use(function( req, res, next){
-console.log(req.ip)
-console.log(req.headers)
-console.log(req.params)
-console.log(req.hostname)
-console.log(req.query)
-console.log(req.protocol)
-next()
-})
-app.get("/books",function(req,res){
-    res.json("books data in object ")
-})
+
+app.use(express.json())
+app.use(express.urlencoded())
+app.use(routers)
+
 app.listen(1249)
 console.log("app start at port 12")
