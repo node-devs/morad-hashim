@@ -12,11 +12,31 @@ router.post("/addUser",function(req,res){
     res.send("user added to database")
 })
 
-router.get("/getUser",function(req,res){
-   
-    const users=usermodel .find().exec()
+router.get('/getUser/:id',function(req,res){
+   const id=req.params.id
+    const users=usermodel .findById({_id:id}).exec()
     users.then((data)=>res.json(data))
     users.catch((err)=>res.json(err))
     
 })
+
+router.put('/updateUser/:id',function(req,res){
+     const id=req.params.id
+     const data=req.body
+     const users=usermodel .findOneAndUpdate({_id:id},{$set:data}).exec()
+     
+     users.then(()=>res.send("user updated succesfuly"))
+     users.catch((err)=>res.json(err))
+     
+ })
+
+ router.delete('/deleteUser/:id',function(req,res){
+    const id=req.params.id
+    const users=usermodel .findByIdAndDelete({_id:id}).exec()
+    
+    users.then(()=>res.send("user deleted succesfuly"))
+    users.catch((err)=>res.json(err))
+    
+})
+
 module.exports=router
